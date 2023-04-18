@@ -35,6 +35,7 @@ while not lõpp:
         posY = 0
         posX += samm + 2
 
+
     if posX >= X - mesilane.get_rect().width:
         posX = X - mesilane.get_rect().width
         posY += samm

@@ -1,59 +1,63 @@
-﻿import pygame
-import random
-import sys
+import pygame
 
-def Maja(x,y,laius,kõrgus,pind,värv):
-    punktid=[(x,y- ((3/4.0) * kõrgus)), (x,y), (x+laius,y), (x+laius,y-(3/4.0) * kõrgus), (x,y-((3/4.0) * kõrgus)), (x+laius/2.0,y-kõrgus), (x+laius,y-(3/4.0)*kõrgus)]
-    suurus=random.randint(1,10)
-    pygame.draw.lines(pind,värv,False,punktid,suurus)
-
-r=random.randint(0,255)
-g=random.randint(0,255)
-b=random.randint(0,255)
-
-fon=[r,g,b]
-
-r=random.randint(0,255)
-g=random.randint(0,255)
-b=random.randint(0,255)
-majavärv=[r,g,b]
+pygame.init()
+ekraani_pind=pygame.display.set_mode((300,300))#создает окно размеров в скобках 
+ekraani_pind.fill(( 0, 0, 0))
+pygame.display.set_caption("Lumememm - Artemi Mihhalenkov")
 
 
-pind=pygame.display.set_mode([640,480]) #Размер окна
-pygame.display.set_caption("Juhuslikud objektid") #Название окна
-pind.fill(fon) #Цвет фона, окна
+lil=pygame.Rect(130,10,50,50)
+pygame.draw.ellipse(ekraani_pind, (250,250,250), lil)
 
-ristkülik=pygame.Rect(300,220,100,178) #Дверь
-pygame.draw.rect(pind,(139,69,19),ristkülik) 
+lil=pygame.Rect(140,25,7,7)
+pygame.draw.ellipse(ekraani_pind, (0,0,200), lil)
 
-lill=pygame.Rect(300,220,100,100)
-pygame.draw.ellipse(pind,(255,255,0),lill)
+lil=pygame.Rect(163,25,7,7)
+pygame.draw.ellipse(ekraani_pind, (0,0,200), lil)
 
-Maja(100,400,300,400,pind,majavärv)
+lil=pygame.Rect(151,38,7,12)
+pygame.draw.ellipse(ekraani_pind, (255,165,0), lil)
+
+lil=pygame.Rect(123,58,65,65)
+pygame.draw.ellipse(ekraani_pind, (250,250,250), lil)
+
+ristkülik=pygame.Rect(80,85,50,7)                            
+pygame.draw.rect(ekraani_pind,(250,250,250),ristkülik)
+
+ristkülik=pygame.Rect(180,85,50,7)                            
+pygame.draw.rect(ekraani_pind,(250,250,250),ristkülik)
+
+lil=pygame.Rect(152,70,7,7)
+pygame.draw.ellipse(ekraani_pind, (0,0,0), lil)
+
+lil=pygame.Rect(152,90,7,7)
+pygame.draw.ellipse(ekraani_pind, (0,0,0), lil)
+
+ristkülik=pygame.Rect(80,50,7,120)                            
+pygame.draw.rect(ekraani_pind,(205,133,63),ristkülik)
+
+lil=pygame.Rect(113,120,85,85)
+pygame.draw.ellipse(ekraani_pind, (250,250,250), lil)
+
+
+
+
+lopp_x=120
+lopp_y=0
+for i in range(10):
+    pygame.draw.line(ekraani_pind,"#a17c38",(83,60),(lopp_x,lopp_y),3 )
+    lopp_x-=8
+    lopp_y+=2
+
+
+
 pygame.display.flip()
 
-for i in range(10):
-    #värv
-    #color=random.choice(varv)
-    r=random.randint(0,255)
-    g=random.randint(0,255)
-    b=random.randint(0,255)
-    varv=[r,g,b]
-    #suurus
-    laius=random.randint(10,50)
-    kõrgus=random.randint(10,50)
-    #pikkus=random.randint(10,50)
-    #asukoht
-    x=random.randint(0,640-laius)
-    y=random.randint(0,480-kõrgus)
-    
-    pygame.draw.rect(pind,varv,[x,y,laius,kõrgus])
-
-    pygame.display.flip()
-
 while True:
-    event=pygame.event.poll()
+    event=pygame.event.poll()  
     if event.type==pygame.QUIT:
-        sys.exit()
+        break
 
-pygame.quit()
+pygame.quit() 
+
+

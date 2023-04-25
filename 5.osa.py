@@ -30,7 +30,7 @@ pygame.display.set_caption("Õuna ja korviga mängimine")
 korvi_pilt = pygame.image.load("among2.png")  # для корзины
 
 clock = pygame.time.Clock()
-score = 0
+#score = 0
 
 while True:
     for event in pygame.event.get():
@@ -57,6 +57,11 @@ while True:
     #    Korvi_X += 5
 
     screen.fill(Valge)
+
+    #for enemy in enemies[:]:
+    #    if player.colliderect(enemy):
+    #        enemies.remove(enemy)
+    #        score += 1
 
     screen.blit(õuna_pilt, (Õun_X, Õun_Y)) # Отображение изображения яблока на экране
     screen.blit(korvi_pilt, (Korvi_X, Korvi_Y)) # Отображение изображения корзины на экране

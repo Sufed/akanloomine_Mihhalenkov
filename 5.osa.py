@@ -15,14 +15,8 @@ Kollane = (255, 255, 0)
 Korvi_laius = 30
 Korvi_kõrgus = 30
 
-Õun1_X = random.randint(0, X - Õuna_suurus)
-Õun1_Y = 0
-
-Õun2_X = random.randint(0, X - Õuna_suurus)
-Õun2_Y = 0
-
-Õun3_X = random.randint(0, X - Õuna_suurus)
-Õun3_Y = 0
+Õun_X = random.randint(0, X - Õuna_suurus)
+Õun_Y = 0
 
 Korvi_X = X // 2 - Korvi_laius // 2
 Korvi_Y = Y // 1.5
@@ -37,7 +31,6 @@ korvi_pilt = pygame.image.load("among2.png")  # для корзины
 
 clock = pygame.time.Clock()
 score = 0
-missed = 0  # количество пропущенных яблок
 
 while True:
     for event in pygame.event.get():
@@ -45,34 +38,37 @@ while True:
             pygame.quit()
             sys.exit()
 
-    # Генерация новых яблок в случайных местах сверху экрана
-    for Õun_X, Õun_Y in [(Õun1_X, Õun1_Y), (Õun2_X, Õun2_Y), (Õun3_X, Õun3_Y)]:
-        if Õun_Y >= Y:
-            Õun_X = random.randint(0, X - Õuna_suurus)
-            Õun_Y = 0
+    #Õun_Y += Õuna_kiirus
 
-    # Перемещение яблок вниз и проверка на столкновение с корзиной и границами экрана
-    for Õun_X, Õun_Y in [(Õun1_X, Õun1_Y), (Õun2_X, Õun2_Y), (Õun3_X, Õun3_Y)]:
-        Õun_Y += Õuna_kiirus
+    #if Õun_Y >= Y:
+    #    score -= 1
+    #    Õun_X = random.randint(0, X - Õuna_suurus)
+    #    Õun_Y = 0
 
-        if (
-            Õun_Y + Õuna_suurus >= Korvi_Y
-            and Õun_X + Õuna_suurus >= Korvi_X
-            and Õun_X <= Korvi_X + Korvi_laius
-        ):
-            score += 1
-            Õun_X = random.randint(0, X - Õuna_suurus)
-            Õun_Y = 0
+    #if Õun_Y + Õuna_suurus >= Korvi_Y and Õun_X + Õuna_suurus >= Korvi_X and Õun_X <= Korvi_X + Korvi_laius:
+    #    score += 1
+    #    Õun_X = random.randint(0, X - Õuna_suurus)
+    #    Õun_Y = 0
 
-        if Õun_Y >= Y:
-            missed += 1
-
-        screen.blit(õuna_pilt, (Õun_X, Õun_Y))
+    #keys = pygame.key.get_pressed()
+    #if keys[pygame.K_LEFT] and Korvi_X > 0:
+    #    Korvi_X -= 5
+    #if keys[pygame.K_RIGHT] and Korvi_X < X - Korvi_laius:
+    #    Korvi_X += 5
 
     screen.fill(Valge)
-    screen.blit(korvi_pilt, (Korvi_X, Korvi_Y))
+
+    screen.blit(õuna_pilt, (Õun_X, Õun_Y)) # Отображение изображения яблока на экране
+    screen.blit(korvi_pilt, (Korvi_X, Korvi_Y)) # Отображение изображения корзины на экране
+
+    #font = pygame.font.Font(None, 36)
+    #score_text = font.render("Счет: {}".format(score), True, Must)
+    #screen.blit(score_text, (10, 10))
+
     pygame.display.flip()
+
     clock.tick(60)
+
 
 
 

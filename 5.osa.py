@@ -114,7 +114,6 @@ while not gameover:
 
 
 #import pygame, random
-#import pygame, random
  
 ##sounds = ['snd1.mp3', 'snd2.mp3', 'snd3.mp3', 'snd4.mp3', 'snd5.mp3']
 ##pygame.mixer.music.load('music/'+random.choice(sounds))

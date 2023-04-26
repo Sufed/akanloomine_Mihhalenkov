@@ -21,7 +21,7 @@ Korvi_kõrgus = 30
 Korvi_X = X // 2 - Korvi_laius // 2
 Korvi_Y = Y // 1.5
 
-Õuna_kiirus = 5
+Õuna_kiirus = 5 #Скорость падения яблок.
 
 screen = pygame.display.set_mode((X, Y))
 pygame.display.set_caption("Õuna ja korviga mängimine")
@@ -30,31 +30,34 @@ pygame.display.set_caption("Õuna ja korviga mängimine")
 korvi_pilt = pygame.image.load("among2.png")  # для корзины
 
 clock = pygame.time.Clock()
-#score = 0
-
-while True:
+score = 0
+gameover=False
+while not gameover:
+    clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+            gameover=True
+        elif pygame.key.get_pressed()[pygame.K_a]:
+            Korvi_X-=5
+        elif pygame.key.get_pressed()[pygame.K_d]:
+            Korvi_X+=5
+        #elif event.type==pygame.KEYDOWN:
+        #    if event.key==pygame.K_LEFT:
+        #        Korvi_X-=5
+        #    elif event.key==pygame.K_RIGHT:
+        #        Korvi_X+=5
 
-    #Õun_Y += Õuna_kiirus
+    Õun_Y += Õuna_kiirus
 
-    #if Õun_Y >= Y:
-    #    score -= 1
-    #    Õun_X = random.randint(0, X - Õuna_suurus)
-    #    Õun_Y = 0
+    if Õun_Y >= Y:
+        Õun_X = random.randint(0, X - Õuna_suurus)
+        Õun_Y = 0
 
     #if Õun_Y + Õuna_suurus >= Korvi_Y and Õun_X + Õuna_suurus >= Korvi_X and Õun_X <= Korvi_X + Korvi_laius:
     #    score += 1
     #    Õun_X = random.randint(0, X - Õuna_suurus)
     #    Õun_Y = 0
 
-    #keys = pygame.key.get_pressed()
-    #if keys[pygame.K_LEFT] and Korvi_X > 0:
-    #    Korvi_X -= 5
-    #if keys[pygame.K_RIGHT] and Korvi_X < X - Korvi_laius:
-    #    Korvi_X += 5
 
     screen.fill(Valge)
 
@@ -72,7 +75,7 @@ while True:
 
     pygame.display.flip()
 
-    clock.tick(60)
+    
 
 
 
@@ -172,3 +175,10 @@ while True:
 #    if score == 20:
 #        gameover = True
 #pygame.quit()
+
+
+    #keys = pygame.key.get_pressed()
+    #if keys[pygame.K_LEFT] and Korvi_X > 0:
+    #    Korvi_X -= 5
+    #if keys[pygame.K_RIGHT] and Korvi_X < X - Korvi_laius:
+    #    Korvi_X += 5

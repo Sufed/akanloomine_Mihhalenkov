@@ -27,17 +27,17 @@ Kuld_Õuna_kiirus = 10  # Скорость падения золотых ябл�
 screen = pygame.display.set_mode((X, Y))
 pygame.display.set_caption("Õuna ja korviga mängimine")
 
-õuna_pilt = pygame.image.load("pall1.png")  # для яблока
+õuna_pilt = pygame.image.load("õun.png")  # для яблока
 kuld_õuna_pilt = pygame.image.load("golden.png") # для золотого яблока
 #halb_õuna_pilt = pygame.image.load("gnilo.png") # для плохого яблока
-korvi_pilt = pygame.image.load("among2.png")  # для корзины
+korvi_pilt = pygame.image.load("among1.png")  # для корзины
 les=pygame.image.load("Pealkirjata.png") # для бэкграунда
 win=pygame.image.load("Win.png") 
 lose=pygame.image.load("lose.png") 
 
 speeds=[Õuna_kiirus, Kuld_Õuna_kiirus, Õuna_kiirus]
-scores=[5,1,-2]
-images=["golden.png", "õun.png", "gnilo.png"]
+scores=[1,5,-2]
+images=["õun.png", "golden.png", "gnilo.png"]
 clock = pygame.time.Clock()
 score = 0
 Õuna_tüüp = random.choice(images)
@@ -61,7 +61,7 @@ while not gameover:
         if Õuna_tüüp == "golden.png":
             Õuna_kiirus = Kuld_Õuna_kiirus
         else:
-            Õuna_kiirus = 5 # Использовать скорость падения для обыч
+            Õuna_kiirus = 5
         õuna_pilt=pygame.image.load(Õuna_tüüp)
         Õun_X = random.randint(0, X - Õuna_suurus)
         Õun_Y = 0

@@ -22,16 +22,20 @@ Korvi_X = X // 2 - Korvi_laius // 2
 Korvi_Y = Y // 1.5
 
 Õuna_kiirus = 5 #Скорость падения яблок.
+Kuld_Õuna_kiirus = 10  # Скорость падения золотых яблок
 
 screen = pygame.display.set_mode((X, Y))
 pygame.display.set_caption("Õuna ja korviga mängimine")
 
 õuna_pilt = pygame.image.load("pall1.png")  # для яблока
-#kuld_õuna_pilt = pygame.image.load("golden.png") # для золотого яблока
+kuld_õuna_pilt = pygame.image.load("golden.png") # для золотого яблока
 #halb_õuna_pilt = pygame.image.load("gnilo.png") # для плохого яблока
 korvi_pilt = pygame.image.load("among2.png")  # для корзины
 les=pygame.image.load("Pealkirjata.png") # для бэкграунда
+win=pygame.image.load("Win.png") 
+lose=pygame.image.load("lose.png") 
 
+speeds=[Õuna_kiirus, Kuld_Õuna_kiirus, Õuna_kiirus]
 scores=[5,1,-2]
 images=["golden.png", "õun.png", "gnilo.png"]
 clock = pygame.time.Clock()
@@ -49,18 +53,22 @@ while not gameover:
         elif pygame.key.get_pressed()[pygame.K_d]:
             Korvi_X+=10
     Õun_Y += Õuna_kiirus
-
     #score+=scores[images.index(Õuna_tüüp)]    
         
     if Õun_Y + Õuna_suurus >= Korvi_Y and Õun_X + Õuna_suurus >= Korvi_X and Õun_X <= Korvi_X + Korvi_laius:
         score+=scores[images.index(Õuna_tüüp)]
         Õuna_tüüp = random.choice(images)
+        if Õuna_tüüp == "golden.png":
+            Õuna_kiirus = Kuld_Õuna_kiirus
+        else:
+            Õuna_kiirus = 5 # Использовать скорость падения для обыч
         õuna_pilt=pygame.image.load(Õuna_tüüp)
         Õun_X = random.randint(0, X - Õuna_suurus)
         Õun_Y = 0
     elif Õun_Y >= Y:
         Õuna_tüüp = random.choice(images)
         õuna_pilt=pygame.image.load(Õuna_tüüp)
+        Õuna_kiirus = speeds[images.index(Õuna_tüüp)]
         Õun_X = random.randint(0, X - Õuna_suurus)
         Õun_Y = 0
         score-=1
@@ -69,15 +77,17 @@ while not gameover:
     screen.fill(Valge)
     screen.blit(les,(0,0))
 
-    if score>=30:
-        screen.fill(Kollane)  # меняем задний фон
+    if score>=20:
+        screen.fill(Valge)
+        screen.blit(win,(0,0))  # меняем задний фон
         pygame.display.flip()
-        pygame.time.wait(60)
+        pygame.time.wait(300)
         break
     elif score<=-20:
-        screen.fill(Valge)  # меняем задний фон
+        screen.fill(Valge)
+        screen.blit(lose,(0,0))   # меняем задний фон
         pygame.display.flip()
-        pygame.time.wait(60)
+        pygame.time.wait(300)
         break
     font = pygame.font.SysFont(None, 25)
     text = font.render("Score: "+str(score), True, Must)

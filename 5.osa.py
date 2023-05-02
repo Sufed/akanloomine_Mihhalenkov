@@ -11,6 +11,8 @@ Valge = (255, 255, 255)
 Must = (0, 0, 0)
 Kollane = (255, 255, 0)
 
+les=pygame.image.load("Pealkirjata.png")
+
 Õuna_suurus = 20
 Korvi_laius = 30
 Korvi_kõrgus = 30
@@ -86,6 +88,9 @@ while not gameover:
     #        score += 1
     #        Õun_X = random.randint(0, X - Õuna_suurus)
     #        Õun_Y = 0
+
+
+    screen.blit(les, (0,0))
     screen.blit(õuna_pilt, (Õun_X, Õun_Y)) # Отображение изображения яблока на экране
     screen.blit(korvi_pilt, (Korvi_X, Korvi_Y)) # Отображение изображения корзины на экране
 
